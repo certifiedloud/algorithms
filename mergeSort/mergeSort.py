@@ -24,17 +24,13 @@ def merge(left, right):
         if left[0] < right[0]:
             combined.append(left[0])
             combined.append(right[0])
-            print(combined)
             return combined
         else:
             combined.append(right[0])
             combined.append(left[0])
-            print(combined)
             return combined
 
-    print("to sort ", left, right)
     while i < len(left) and j < len(right):
-        print(left, right, combined, i,j)
         if left[i] < right[j]:
             combined.append(left[i])
             i+=1
@@ -52,8 +48,9 @@ def merge(left, right):
 
     return combined
 
-my_array = [4,3,6,5,2,1,8,7]
+my_array = [10,4,3,6,11,5,2,1,8,7,9]
 
 sorted_array = merge_sort(my_array)
 
+print("unsorted: ", my_array)
 print("RESULT: ", sorted_array)
