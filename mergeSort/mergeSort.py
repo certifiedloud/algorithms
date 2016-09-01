@@ -19,7 +19,6 @@ def merge(left, right):
     i=0
     j=0
     combined = []
-    combinedLength = len(left) + len(right)
 
     while i < len(left) and j < len(right):
         if left[i] < right[j]:
@@ -46,5 +45,4 @@ random.shuffle(my_array)
 print("sorting array")
 sorted_array = merge_sort(my_array)
 
-print("unsorted: ", my_array)
 print("RESULT: ", sorted_array)
