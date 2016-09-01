@@ -1,4 +1,5 @@
 #An implementation of the merge sort algorithm
+import random
 
 def merge_sort(my_array):
     if(len(my_array) < 2):
@@ -38,7 +39,11 @@ def merge(left, right):
 
     return combined
 
-my_array = [10,4,3,6,11,5,2,1,8,7,9]
+print("generating array")
+my_array = list(range(1,800000))
+print("randomizing array")
+random.shuffle(my_array)
+print("sorting array")
 sorted_array = merge_sort(my_array)
 
 print("unsorted: ", my_array)
