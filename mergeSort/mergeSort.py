@@ -20,23 +20,30 @@ def merge(left, right):
     combined = []
     combinedLength = len(left) + len(right)
 
-    for k in range(combinedLength):
-        print(left, right, combined, i,j,k)
+    if combinedLength < 3:
+        if left[0] < right[0]:
+            combined.append(left[0])
+            combined.append(right[0])
+            print(combined)
+            return combined
+        else:
+            combined.append(right[0])
+            combined.append(left[0])
+            print(combined)
+            return combined
+
+    print("to sort ", left, right)
+    while i < len(left) and j < len(right):
+        print(left, right, combined, i,j)
         if left[i] < right[j]:
             combined.append(left[i])
             i+=1
-            if combinedLength <3:
-                combined.append(right[j])
-                break
-        elif right[j] < left[i]:
+        else:
             combined.append(right[j])
             j+=1
-            if combinedLength <3:
-                combined.append(left[i])
-                break
     return combined
 
-my_array = [4,3,6,5,1,2,8,7]
+my_array = [4,3,6,5,2,1,8,7]
 
 sorted_array = merge_sort(my_array)
 
