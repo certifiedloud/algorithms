@@ -49,7 +49,6 @@ def merge(left, right):
     return combined
 
 my_array = [10,4,3,6,11,5,2,1,8,7,9]
-
 sorted_array = merge_sort(my_array)
 
 print("unsorted: ", my_array)
