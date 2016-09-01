@@ -20,16 +20,6 @@ def merge(left, right):
     combined = []
     combinedLength = len(left) + len(right)
 
-    if combinedLength < 3:
-        if left[0] < right[0]:
-            combined.append(left[0])
-            combined.append(right[0])
-            return combined
-        else:
-            combined.append(right[0])
-            combined.append(left[0])
-            return combined
-
     while i < len(left) and j < len(right):
         if left[i] < right[j]:
             combined.append(left[i])
