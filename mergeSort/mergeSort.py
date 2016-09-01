@@ -41,6 +41,15 @@ def merge(left, right):
         else:
             combined.append(right[j])
             j+=1
+
+    while i < len(left):
+        combined.append(left[i])
+        i += 1
+
+    while j < len(right):
+        combined.append(right[j])
+        j += 1
+
     return combined
 
 my_array = [4,3,6,5,2,1,8,7]
