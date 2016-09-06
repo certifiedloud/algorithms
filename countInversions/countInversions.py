@@ -1,6 +1,7 @@
-#An implementation of the merge sort algorithm that also counts array inversions
+#An implementation of the merge sort algorithm
+import random
 
-def merge_and_count(my_array):
+def merge_sort(my_array):
     if(len(my_array) < 2):
         return my_array
 
@@ -18,25 +19,30 @@ def merge(left, right):
     i=0
     j=0
     combined = []
-    combinedLength = len(left) + len(right)
-    for k in range(combinedLength):
+
+    while i < len(left) and j < len(right):
         if left[i] < right[j]:
-            combined.insert(k, left[i])
-            if combinedLength == 2:
-                combined.insert(k+1, right[j])
-                break
-            ++i
+            combined.append(left[i])
+            i+=1
         else:
-            combined.insert(k, right[j])
-            if combinedLength == 2:
-                combined.insert(k+1, left[i])
-                break
-            ++j
-    print(combined)
+            combined.append(right[j])
+            j+=1
+
+    while i < len(left):
+        combined.append(left[i])
+        i += 1
+
+    while j < len(right):
+        combined.append(right[j])
+        j += 1
+
     return combined
 
-my_array = [4,3,6,5,1,2,8,7]
-
-sorted_array = merge_and_count(my_array)
+print("generating array")
+my_array = list(range(1,800000))
+print("randomizing array")
+random.shuffle(my_array)
+print("sorting array")
+sorted_array = merge_sort(my_array)
 
 print("RESULT: ", sorted_array)
