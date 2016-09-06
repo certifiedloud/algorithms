@@ -39,7 +39,7 @@ def merge(left, right):
     return combined
 
 #this array has 3 inversions
-my_array = [1.3.5.2.4.6]
+my_array = [1,3,5,2,4,6]
 print("sorting and counting inversions")
 inv_count = merge_sort_count(my_array)
 
