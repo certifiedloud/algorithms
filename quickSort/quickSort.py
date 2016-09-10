@@ -2,31 +2,26 @@
 
 def choose_pivot(array):
     #naively choose the first element in the array
-    return 0
+    return array[0]
 
-def partition(array, pivot_index):
-    left = array[:pivot_index]
-    right = array[pivot_index:]
-    i = left + 1
-    p = array[left]
-    for j in range(i, right):
+def partition(array, l, r):
+    p = choose_pivot(array)
+    i = l + 1
+    for j in range(l+1, r):
         if array[j] < p:
-            array.insert(p - 1, array.pop(j))
-            array[j], array[i] = array[i], array[j]
-            ++i
-
-    array[left], array[i - 1] = array[i - 1], array[left]
+            array[i], array[j] = array[j], array[i]
+            i = i+1
+    array[l], array[i-1] = array[i-1], array[l]
 
 def quick_sort(starting_array):
     if len(starting_array) == 1:
         return starting_array
 
-    pivot_index = choose_pivot(starting_array)
 
-    partition(starting_array, pivot_index)
+    partition(starting_array, 0, len(starting_array)-1)
 
-    quick_sort(starting_array[:pivot_index - 1])
-    quick_sort(starting_array[pivot_index + 1:])
+    # quick_sort(starting_array[:pivot_index - 1])
+    # quick_sort(starting_array[pivot_index + 1:])
 
     return starting_array
 
