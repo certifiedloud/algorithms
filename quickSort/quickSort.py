@@ -4,7 +4,7 @@ def partition(array, l, r):
     print("partitioning ", array)
     p = array[l]
     i = l + 1
-    for j in range(l+1, r):
+    for j in range(l, r+1):
         if array[j] < p:
             array[i], array[j] = array[j], array[i]
             i = i+1
@@ -22,9 +22,9 @@ def quick_sort(array, l, r):
 
 def main():
     array = [3,8,1,5,2,4,7,6]
-    # starting_array = [1,2,3,4,5,6,7,8]
+    # array = [1,2,3,4,5,6,7,8]
     quick_sort(array, 0, len(array)-1)
-    print(array)
+    print("Finished ",array)
 
 if __name__ == '__main__':
     main()
