@@ -4,13 +4,13 @@ def partition(array, l, r):
     print("partitioning ", array)
     p = array[l]
     i = l + 1
-    for j in range(l, r):
+    print(p,i,l,r)
+    for j in range(l+1, r):
         if array[j] < p:
             array[i], array[j] = array[j], array[i]
             i = i+1
     array[l], array[i-1] = array[i-1], array[l]
     print("partitioned ", array, p)
-    print(array[:p], array[p+1:])
     return i
 
 def quick_sort(array, l, r):
