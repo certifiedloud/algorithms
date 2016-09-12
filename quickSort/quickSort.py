@@ -18,7 +18,7 @@ def quick_sort(array, l, r):
         pivot = partition(array, l, r)
 
         quick_sort(array, l, pivot - 1)
-        quick_sort(array, pivot + 1, r)
+        quick_sort(array, pivot, r)
 
 def main():
     array = [3,8,1,5,2,4,7,6]
