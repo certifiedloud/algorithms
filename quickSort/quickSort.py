@@ -1,19 +1,16 @@
 #An implementation of the QuickSort algorithm
 
 def partition(array, l, r):
-    # print("partitioning ", array)
     p = array[l]
     i = l + 1
     comps = 0
-    # print(p,i,l,r)
     for j in range(l+1, r):
         if array[j] < p:
             array[i], array[j] = array[j], array[i]
             i = i+1
         comps += 1
     array[l], array[i-1] = array[i-1], array[l]
-    # print("partitioned ", array, p)
-    return i, comps
+    return i, comps #return the number of comparisons made for analysis. 
 
 def quick_sort(array, l, r):
     comps = 0
@@ -36,7 +33,6 @@ def choose_pivot(array,l,r):
     the_three.sort()
     p = the_three[1]
     p_index = array.index(p)
-    # print(p,p_index)
     array[l], array[p_index] = array[p_index], array[l]
 
 
@@ -47,7 +43,7 @@ def main():
         string_array = f.read().splitlines()
     array = [int(i) for i in string_array]
     print(quick_sort(array, 0, len(array)))
-    # print("Finished ",array)
+    print("Finished ",array)
 
 if __name__ == '__main__':
     main()
