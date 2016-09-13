@@ -26,16 +26,18 @@ def quick_sort(array, l, r):
     return comps
 
 def choose_pivot(array,l,r):
-    if len(array) % 2 != 0:
-        middle = array[len(array)/2-1]
-    elif len(array) % 2 == 0:
-        middle = array[len(array)/2]
-    first = array[0]
-    last = array[len(array)-1]
+    if len(array[l:r]) % 2 != 0:
+        middle = array[l:r][int(len(array[l:r])/2)]
+    elif len(array[l:r]) % 2 == 0:
+        middle = array[l:r][int(len(array[l:r])/2-1)]
+    first = array[l:r][0]
+    last = array[l:r][len(array[l:r])-1]
     the_three = [first, middle, last]
     the_three.sort()
     p = the_three[1]
-    array[l], array[array.index(p)] = array[array.index(p)], array[l]
+    p_index = array.index(p)
+    # print(p,p_index)
+    array[l], array[p_index] = array[p_index], array[l]
 
 
 def main():
