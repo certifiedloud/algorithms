@@ -22,12 +22,11 @@ def read_data():
 
 def merge_vertices(first_vertex, second_vertex, first_sub_list, graph):
     # find the second list and add it to the first, then remove the original
-    # first_list = first_index
     second_sub_list = 0
     for i in range(0,len(graph)):
         if graph[i][0] == second_vertex:
             second_sub_list = i
-    orig_sec_list = graph[second_sub_list]
+
     # remove the duplicate vertex
     try:
         graph[second_sub_list].remove(first_vertex)
@@ -38,24 +37,26 @@ def merge_vertices(first_vertex, second_vertex, first_sub_list, graph):
 
     # clean up other references to the old vertex
     for i in range(len(graph)):
-        # for j in range(len(graph[i])):
-        for item in graph[i][1:]:
-            if item == second_vertex:
-                graph[i].remove(item)
+        for j in range(len(graph[i])):
+            if graph[i][j] == second_vertex:
+                graph[i][j] = first_vertex
 
     graph.remove(graph[second_sub_list])
-    #remove_self_loops(graph)
+    remove_self_loops(graph)
 
 def remove_self_loops(graph):
     for i in range(len(graph)):
-        for item in graph[i]:
+        for item in graph[i][1:]:
             if item == graph[i][0]:
                 graph[i].remove(item)
 def contract_random_points(graph):
     print(len(graph))
     first_sub_list = random.randint(0, len(graph)-1)
     first_vertex = graph[first_sub_list][0]
-    second_vertex = graph[first_sub_list][random.randint(1, len(graph[first_sub_list])-1)]
+    if len(graph[first_sub_list])>1:
+        second_vertex = graph[first_sub_list][random.randint(1, len(graph[first_sub_list])-1)]
+    else:
+        pass
 
     print("\
      first_vertex: {}\n\
@@ -69,9 +70,20 @@ def karger(graph):
         contract_random_points(graph);
 
 def main():
+    # possible_mins = []
+    # for i in range(1000):
+    #     random.seed()
+    #     graph = read_data()
+    #     karger(graph)
+    #     min = -1
+    #     firstLen = len(graph[0])
+    #     secondLen = len(graph[1])
+    #     min = firstLen + secondLen
+    #     possible_mins.append(min)
+    # print("possible mins", sorted(possible_mins))
     graph = read_data()
     karger(graph)
-    print(graph, len(graph))
+    print(graph, len(graph[0]), len(graph[1]))
 
 if __name__ == '__main__':
     main()
