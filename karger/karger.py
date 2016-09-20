@@ -13,22 +13,33 @@ def read_data():
     for sub_list in graph:
         for i in range(len(sub_list)):
             try:
+                #convert to int
                 sub_list[i] = int(sub_list[i])
             except:
+                # remove the empty string
                 sub_list.pop(i)
     return graph
 
-
-def karger():
-    # contract two random points
-
-    # delete self-loops
+def remove_self_loops():
     pass
+
+def update_vertex_references():
+    pass
+
+def contract_random_points():
+    pass
+
+def karger(graph):
+    while len(graph) > 2:
+        old_vertex, new_vertex = contract_random_points();
+        update_vertex_references(old_vertex, new_vertex)
+        remove_self_loops()
+    print(graph)
 
 def main():
     graph = read_data()
     print(graph)
-    karger()
+    karger(graph)
 
 if __name__ == '__main__':
     main()
