@@ -20,9 +20,6 @@ def read_data():
                 sub_list.pop(i)
     return graph
 
-def remove_self_loops(graph):
-    pass
-
 def merge_vertices(first_vertex, second_vertex, first_sub_list, graph):
     # find the second list and add it to the first, then remove the original
     # first_list = first_index
@@ -30,38 +27,35 @@ def merge_vertices(first_vertex, second_vertex, first_sub_list, graph):
     for i in range(0,len(graph)):
         if graph[i][0] == second_vertex:
             second_sub_list = i
-    graph[first_sub_list] = graph[first_sub_list] + graph[second_sub_list]
-
-    # clean up the newly extended first list
-    print(graph[first_sub_list])
-    print(graph[second_sub_list])
-    print("trying to remove ", first_vertex)
+    orig_sec_list = graph[second_sub_list]
+    # remove the duplicate vertex
     try:
-        graph[1:first_sub_list].remove(first_vertex)
+        graph[second_sub_list].remove(first_vertex)
     except:
-        # do nothing
         pass
+    # combine the two lists
+    graph[first_sub_list] = graph[first_sub_list] + graph[second_sub_list]
 
     # clean up other references to the old vertex
     for i in range(len(graph)):
-        for j in range(len(graph[i])):
-            if graph[i][j] == second_vertex:
-                del graph[i][j]
+        # for j in range(len(graph[i])):
+        for item in graph[i][1:]:
+            if item == second_vertex:
+                graph[i].remove(item)
 
     graph.remove(graph[second_sub_list])
+    #remove_self_loops(graph)
 
-
-
+def remove_self_loops(graph):
+    for i in range(len(graph)):
+        for item in graph[i]:
+            if item == graph[i][0]:
+                graph[i].remove(item)
 def contract_random_points(graph):
+    print(len(graph))
     first_sub_list = random.randint(0, len(graph)-1)
     first_vertex = graph[first_sub_list][0]
-    print
-    second_vertex = random.randint(1, len(graph[first_sub_list])-1)
-    # second_index = random.randint(1, len(graph[first_index])-1)
-
-    # first_vertex = graph[first_index][0]
-    print("----- ", first_vertex)
-    # second_vertex = graph[first_index][second_index]
+    second_vertex = graph[first_sub_list][random.randint(1, len(graph[first_sub_list])-1)]
 
     print("\
      first_vertex: {}\n\
@@ -69,21 +63,15 @@ def contract_random_points(graph):
      ".format(first_vertex, second_vertex))
 
     merge_vertices(first_vertex, second_vertex, first_sub_list, graph)
-    remove_self_loops(graph)
-
-    return 1,2
-
-
 
 def karger(graph):
-    # while len(graph) > 2:
-    old_vertex, new_vertex = contract_random_points(graph);
-    #print(graph)
+    while len(graph) > 2:
+        contract_random_points(graph);
 
 def main():
     graph = read_data()
-    #print(graph)
     karger(graph)
+    print(graph, len(graph))
 
 if __name__ == '__main__':
     main()
