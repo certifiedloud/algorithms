@@ -26,12 +26,16 @@ def remove_self_loops():
 def update_vertex_references():
     pass
 
-def contract_random_points():
-    pass
+def contract_random_points(graph):
+    first_index = random.randint(0, len(graph))
+    second_index = random.randint(0, len(graph[first_index]))
+
+
+
 
 def karger(graph):
     while len(graph) > 2:
-        old_vertex, new_vertex = contract_random_points();
+        old_vertex, new_vertex = contract_random_points(graph);
         update_vertex_references(old_vertex, new_vertex)
         remove_self_loops()
     print(graph)
