@@ -42,7 +42,10 @@ def merge_vertices(first_vertex, second_vertex, first_sub_list, graph):
                 graph[i][j] = first_vertex
 
     graph.remove(graph[second_sub_list])
-    remove_self_loops(graph)
+    # remove_self_loops(graph)
+    for i in graph[first_sub_list]:
+        if i == first_vertex and graph[first_sub_list].index(i) != 0:
+            del graph[first_sub_list][i]
 
 def remove_self_loops(graph):
     for i in range(len(graph)):
