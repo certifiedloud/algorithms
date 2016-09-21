@@ -41,19 +41,24 @@ def merge_vertices(first_vertex, second_vertex, first_sub_list, graph):
             if graph[i][j] == second_vertex:
                 graph[i][j] = first_vertex
 
-    graph.remove(graph[second_sub_list])
-    # remove_self_loops(graph)
-    for i in graph[first_sub_list]:
-        if i == first_vertex and graph[first_sub_list].index(i) != 0:
-            del graph[first_sub_list][i]
 
-def remove_self_loops(graph):
-    for i in range(len(graph)):
-        for item in graph[i][1:]:
-            if item == graph[i][0]:
-                graph[i].remove(item)
+    # remove_self_loops(graph)
+    indices_to_remove = []
+    # print("the len ",len(graph[first_sub_list]))
+    for i in range(1, len(graph[first_sub_list])):
+        if graph[first_sub_list][i] == first_vertex:
+            indices_to_remove.append(i)
+
+    # reverse sort these indices so we can remove them in a loop without conflicts
+    sorted(indices_to_remove)
+    indices_to_remove.reverse()
+    for i in indices_to_remove:
+        del graph[first_sub_list][i]
+
+    # remove old list that was merged
+    graph.remove(graph[second_sub_list])
+
 def contract_random_points(graph):
-    print(len(graph))
     first_sub_list = random.randint(0, len(graph)-1)
     first_vertex = graph[first_sub_list][0]
     if len(graph[first_sub_list])>1:
@@ -73,20 +78,18 @@ def karger(graph):
         contract_random_points(graph);
 
 def main():
-    # possible_mins = []
-    # for i in range(1000):
-    #     random.seed()
-    #     graph = read_data()
-    #     karger(graph)
-    #     min = -1
-    #     firstLen = len(graph[0])
-    #     secondLen = len(graph[1])
-    #     min = firstLen + secondLen
-    #     possible_mins.append(min)
-    # print("possible mins", sorted(possible_mins))
-    graph = read_data()
-    karger(graph)
-    print(graph, len(graph[0]), len(graph[1]))
+    possible_mins = []
+    for i in range(100):
+        random.seed()
+        graph = read_data()
+        karger(graph)
+        min = -1
+        firstLen = len(graph[0])
+        secondLen = len(graph[1])
+        min = firstLen
+        possible_mins.append(min-1) #subtract one to account for the node label
+    print("possible mins", sorted(possible_mins))
+    print(graph)
 
 if __name__ == '__main__':
     main()
