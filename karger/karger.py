@@ -79,16 +79,16 @@ def karger(graph):
 
 def main():
     possible_mins = []
-    for i in range(100):
+    interations = 10
+    for i in range(interations):
         random.seed()
         graph = read_data()
         karger(graph)
-        min = -1
         firstLen = len(graph[0])
-        secondLen = len(graph[1])
-        min = firstLen
-        possible_mins.append(min-1) #subtract one to account for the node label
-    print("possible mins", sorted(possible_mins))
+        min = firstLen - 1
+        possible_mins.append(min) #subtract one to account for the node label
+    possible_mins = sorted(possible_mins)
+    print("Lowest cut found after {} tries: {}".format(interations, possible_mins[0]))
     print(graph)
 
 if __name__ == '__main__':
