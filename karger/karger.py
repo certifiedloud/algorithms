@@ -44,7 +44,6 @@ def merge_vertices(first_vertex, second_vertex, first_sub_list, graph):
 
     # remove_self_loops(graph)
     indices_to_remove = []
-    # print("the len ",len(graph[first_sub_list]))
     for i in range(1, len(graph[first_sub_list])):
         if graph[first_sub_list][i] == first_vertex:
             indices_to_remove.append(i)
@@ -65,11 +64,6 @@ def contract_random_points(graph):
         second_vertex = graph[first_sub_list][random.randint(1, len(graph[first_sub_list])-1)]
     else:
         pass
-
-    print("\
-     first_vertex: {}\n\
-     second_vertex: {}\n\
-     ".format(first_vertex, second_vertex))
 
     merge_vertices(first_vertex, second_vertex, first_sub_list, graph)
 
