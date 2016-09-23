@@ -23,21 +23,27 @@ from Node import Node
 
 def read_data_in():
     print("Reading graph from file...")
-    all_nodes = []
+    all_node_names = []
     graph = []
-    for i in range(1, 875715):
-        all_nodes.append(Node(i))
+    graph.append(Node(1))
+    all_node_names.append(1)
+    current_node = graph[0]
     with open("scc.txt") as f:
-        current_node = all_nodes[0]
         for line in f:
             data, adjacent = line.split()
-            print(data)
-            if int(data) == current_node.data:
-                current_node.neighbors.append(all_nodes[int(adjacent)])
+            data, adjacent = int(data), int(adjacent)
+            if data not in all_node_names:
+                all_node_names.append(data)
+                graph.append(Node(data))
+            if adjacent not in all_node_names:
+                all_node_names.append(adjacent)
+                graph.append(Node(adjacent))
+            if data == current_node.data:
+                current_node.neighbors.append(all_node_names[adjacent])
             else:
                 graph.append(current_node)
-                current_node = all_nodes[int(data)]
-                current_node.neighbors.append(all_nodes[int(adjacent)])
+                current_node = all_nodes[data]
+                current_node.neighbors.append(all_node_names[adjacent])
     del all_nodes
     print("Graph has been constructed!")
 
