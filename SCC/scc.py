@@ -36,17 +36,13 @@ def read_data_in():
             if v1 > all_nodes[len(all_nodes)-1]:
                 n1 = Node(v1)
                 all_nodes.append(n1)
-                if v2 not in n1.neighbors:
-                    n2 = Node(v2)
-                    n1.neighbors.append(n2)
+                n1.neighbors.append(v2)
             else:
-                if v2 not in all_nodes:
-                    n2 = Node(v2)
-                    all_nodes.append(n2)
-                all_nodes[len(all_nodes)-1].neighbors.append(n2)
+                n1 = all_nodes[len(all_nodes)-1]
+                n1.neighbors.append(v2)
 
-    print(len(all_nodes))
-    print(all_nodes)
+    for i in range(100):
+        print(all_nodes[i], all_nodes[i].neighbors)
 
 def main():
     read_data_in()
