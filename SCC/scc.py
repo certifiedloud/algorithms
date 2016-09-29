@@ -23,30 +23,30 @@ from Node import Node
 
 def read_data_in():
     print("Reading graph from file...")
-    all_node_names = []
+    all_nodes = []
     graph = []
-    graph.append(Node(1))
-    all_node_names.append(1)
-    current_node = graph[0]
+    existing_node_names = []
+    current_data_name = 1
+    all_nodes.append(Node(1))
     with open("scc.txt") as f:
         for line in f:
-            data, adjacent = line.split()
-            data, adjacent = int(data), int(adjacent)
-            if data not in all_node_names:
-                all_node_names.append(data)
-                graph.append(Node(data))
-            if adjacent not in all_node_names:
-                all_node_names.append(adjacent)
-                graph.append(Node(adjacent))
-            if data == current_node.data:
-                current_node.neighbors.append(all_node_names[adjacent])
+            v1, v2 = line.split(" ",1)
+            v1 = int(v1)
+            v2 = int(v2)
+            if v1 > all_nodes[len(all_nodes)-1]:
+                n1 = Node(v1)
+                all_nodes.append(n1)
+                if v2 not in n1.neighbors:
+                    n2 = Node(v2)
+                    n1.neighbors.append(n2)
             else:
-                graph.append(current_node)
-                current_node = all_nodes[data]
-                current_node.neighbors.append(all_node_names[adjacent])
-    del all_nodes
-    print("Graph has been constructed!")
+                if v2 not in all_nodes:
+                    n2 = Node(v2)
+                    all_nodes.append(n2)
+                all_nodes[len(all_nodes)-1].neighbors.append(n2)
 
+    print(len(all_nodes))
+    print(all_nodes)
 
 def main():
     read_data_in()
