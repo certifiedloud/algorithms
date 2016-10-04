@@ -1,3 +1,5 @@
+import sys
+import time
 """
 The file contains the edges of a directed graph. Vertices are labeled as positive
 integers from 1 to 875714. Every row indicates an edge, the vertex label in first
@@ -40,12 +42,32 @@ def read_data_in():
             else:
                 n1 = all_nodes[len(all_nodes)-1]
                 n1.neighbors.append(v2)
-
-    for i in range(100):
+    for i in range(10):
         print(all_nodes[i], all_nodes[i].neighbors)
+    print(len(all_nodes))
+    return all_nodes
+
+def dfs(all_nodes, node):
+    node.discovered = True
+    print(node)
+    for neighbor in node.neighbors:
+        try:
+            nodeObj = all_nodes[all_nodes.index(neighbor)]
+        except:
+            return
+        if nodeObj.discovered == False:
+            dfs(all_nodes, nodeObj)
 
 def main():
-    read_data_in()
+    sys.setrecursionlimit(50000)
+    start_read_time = time.time()
+    all_nodes = read_data_in()
+    end_read_time = time.time()
+    print("Finished reading data in: {}".format(end_read_time - start_read_time))
+    start_dfs_time = time.time()
+    dfs(all_nodes ,all_nodes[0])
+    end_dfs_time = time.time()
+    print("complete in: {}".format(end_dfs_time - start_dfs_time))
 
 if __name__ == '__main__':
     main()

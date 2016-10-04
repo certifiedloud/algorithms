@@ -7,7 +7,7 @@ class Node(object):
 
     def __int__(self):
         return self.data
-        
+
     def __str__(self):
         return str(self.data)
 
@@ -16,3 +16,6 @@ class Node(object):
 
     def __lt__(self, other):
         return self.data < other
+
+    def __eq__(self, other):
+        return self.data == other
